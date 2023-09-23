@@ -90,7 +90,19 @@ export default {
    
     <v-card class="card">
       <div class="categories">
-        <div class="category-item"><div class="title">Categorias</div><div class="title slider">Sensibilidad</div></div>
+        <div class="category-item">
+          <div class="title">Categorias</div>
+          <div class="title slider">
+            Sensibilidad
+            <v-tooltip text="Un nivel alto de sensibilidad actuará ante cualquier comentario en dicha categoría">
+              <template v-slot:activator="{ props }">
+                <v-btn icon v-bind="props" variant="plain">
+                  <v-icon icon="mdi-information" size="small"></v-icon>
+                </v-btn>
+              </template>
+            </v-tooltip>
+          </div>
+        </div>
         <div class="category-item" v-for="(cat, key) of categories">
           <v-checkbox :label="cat.name" v-model="cat.active"></v-checkbox>
           <v-slider class="slider tag" v-model="cat.sesibility" :disabled="!cat.active" step="0.05" min="0" max="1"></v-slider>
