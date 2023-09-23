@@ -6,8 +6,8 @@ export default {
     return {
       open: ['Platforms'],
       platforms: [
-        ['Tiwtch', 'twitch', 'mdi-twitch'],
-        ['YouTube', 'youtube', 'mdi-youtube']
+        ['Tiwtch', 'twitch', 'mdi-twitch', '#624BFF'],
+        ['YouTube', 'youtube', 'mdi-youtube', '#c4302b']
       ]
     }
   },
@@ -40,10 +40,11 @@ export default {
 
           <v-list density="compact" nav>
             <v-list-item
-              v-for="([title, value, icon], i) in platforms"
+              v-for="([title, value, icon, color], i) in platforms"
               :key="i"
               :title="title"
               :prepend-icon="icon"
+              :base-color="color"
               :value="title"
               @click="navigate('PLATFORM', value)"
             ></v-list-item>
