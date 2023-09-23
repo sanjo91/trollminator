@@ -49,11 +49,24 @@ export default {
         'harassment/threatening': { name: 'Acoso/amenazas', active: false, ratio: 0, action: '' },
         violence: { name: 'Violencia', active: false, ratio: 0, action: '' }
       },
+      catName: {
+        sexual: 'Sexual',
+        hate: 'Odio',
+        harassment: 'Acoso',
+        'self-harm': 'Autolesiones',
+        'sexual/minors': 'Sexual/menores de edad',
+        'hate/threatening': 'Odio/amenazas',
+        'violence/graphic': 'Violencia/gráfico',
+        'self-harm/intent': 'Autolesiones/intento',
+        'self-harm/instructions': 'Autolesiones/instrucciones',
+        'harassment/threatening': 'Acoso/amenazas',
+        violence: 'Violencia'
+      },
       actions: [
         // { name: 'Banear permanentemente', value: 'banner_permanent' },
         // { name: 'Borrar comentario', value: 'delete_comment' },
         { name: 'Alertar', value: 'alert' },
-        { name: 'Bannear', value: 'banner' }
+        // { name: 'Bannear', value: 'banner' }
       ]
     }
   },
@@ -75,7 +88,7 @@ export default {
       axios
       .get('user/twitch/config')
       .then((response) => {
-        this.categories = response.data.results // Accede a la propiedad 'results' que contiene el array de datos
+        this.categories = response.data // Accede a la propiedad 'results' que contiene el array de datos
         console.log(this.categories)
       })
       .catch((error) => {
@@ -143,7 +156,7 @@ export default {
           </div>
         </div>
         <div class="category-item" v-for="(cat, key) of categories">
-          <v-checkbox :label="cat.name" v-model="cat.active"></v-checkbox>
+          <v-checkbox :label="catName[key]" v-model="cat.active"></v-checkbox>
           <v-slider
             class="slider tag"
             v-model="cat.sesibility"
