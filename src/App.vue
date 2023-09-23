@@ -6,7 +6,7 @@ export default {
     return {
       open: ['Platforms'],
       platforms: [
-        ['Tiwtch', 'tiwtch', 'mdi-twitch'],
+        ['Tiwtch', 'twitch', 'mdi-twitch'],
         ['YouTube', 'youtube', 'mdi-youtube']
       ]
     }

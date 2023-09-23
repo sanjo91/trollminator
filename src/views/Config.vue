@@ -49,7 +49,7 @@ export default {
       .get('https://rickandmortyapi.com/api/character/?page=19')
       .then((response) => {
         this.data = response.data.results // Accede a la propiedad 'results' que contiene el array de datos
-        console.log(this.data)
+        console.log(this.ccategories)
       })
       .catch((error) => {
         console.error('Error:', error)
@@ -91,10 +91,10 @@ export default {
     <v-card class="card">
       <div class="categories">
         <div class="category-item"><div class="title">Categorias</div><div class="title slider">Sensibilidad</div></div>
-        <div class="category-item" v-for="cat of categories">
-          <v-checkbox :label="cat.name" v-model="cat.active"></v-checkbox>
+        <div class="category-item" v-for="(cat, key) of categories">
+          <v-checkbox :label="key" v-model="cat.active"></v-checkbox>
           <v-slider class="slider" v-model="cat.sesibility" :disabled="!cat.active" step="0.05" min="0" max="1"></v-slider>
-          <v-select label="Select" :items="punishment" item-title="name" item-value="value" variant="outlined" v-model="cat.punishment" :disabled="!cat.active"></v-select>
+          <v-select label="Select" :items="actions" item-title="name" item-value="value" variant="outlined" v-model="cat.punishment" :disabled="!cat.active"></v-select>
         </div>
         <v-btn @click="send">Enviar</v-btn>
       </div>
