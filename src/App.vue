@@ -6,10 +6,18 @@ import { RouterLink, RouterView } from 'vue-router'
       return {
       open: ['Platforms'],
       platforms: [
-        ['Tiwtch', 'mdi-twitch'],
-        ['Discord', 'mdi-discord'],
-      ]
-    };
+        ['Tiwtch', 'tiwtch', 'mdi-twitch'],
+        ['Discord', 'discord', 'mdi-discord'],
+      ]};
+    },
+    methods: {
+      navigate(name: string, value : string){
+        const route = { name }
+        if (value) {
+          route.params = { id : value }
+        }
+        this.$router.push(route)
+      }
     }
   };
 </script>
@@ -33,7 +41,7 @@ import { RouterLink, RouterView } from 'vue-router'
         <v-divider></v-divider>
 
         <v-list density="compact" nav>
-          <v-list-item prepend-icon="mdi-cog" title="Configurar promt" value="config"></v-list-item>
+          <v-list-item prepend-icon="mdi-cog" title="Configurar promt" value="config" @click="navigate('CONFIG')"></v-list-item>
           
           <v-list-group value="platforms">
             <template v-slot:activator="{ props }">
@@ -44,14 +52,15 @@ import { RouterLink, RouterView } from 'vue-router'
               ></v-list-item>
             </template>
             <v-list-item
-              v-for="([title, icon], i) in platforms"
+              v-for="([title, value, icon], i) in platforms"
               :key="i"
               :title="title"
               :prepend-icon="icon"
               :value="title"
+              @click="navigate('PLATFORM', value)"
             ></v-list-item>
           </v-list-group>
-          <v-list-item prepend-icon="mdi-plus" title="Añadir plataforma" value="add"></v-list-item>
+          <v-list-item prepend-icon="mdi-plus" title="Añadir plataforma" value="add" @click="navigate('ADD_PLATFORM')"></v-list-item>
         </v-list>
       </v-navigation-drawer>
 
