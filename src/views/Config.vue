@@ -8,21 +8,21 @@ export default {
       prompt: '',
       data: undefined,
       categories: {
-        sexual: { active: false, ratio: 0, action: '' },
-        hate: { active: false, ratio: 0, action: '' },
-        harassment: { active: false, ratio: 0, action: '' },
-        'self-harm': { active: false, ratio: 0, action: '' },
-        'sexual/minors': { active: false, ratio: 0, action: '' },
-        'hate/threatening': { active: false, ratio: 0, action: '' },
-        'violence/graphic': { active: false, ratio: 0, action: '' },
-        'self-harm/intent': { active: false, ratio: 0, action: '' },
-        'self-harm/instructions': { active: false, ratio: 0, action: '' },
-        'harassment/threatening': { active: false, ratio: 0, action: '' },
-        violence: { active: false, ratio: 0, action: '' }
+        sexual: { name: "Sexual", active: false, ratio: 0, action: '', },
+        hate: { name: "Odio", active: false, ratio: 0, action: '' },
+        harassment: { name: "Acoso", active: false, ratio: 0, action: '' },
+        'self-harm': { name: "Autolesiones", active: false, ratio: 0, action: '' },
+        'sexual/minors': { name: "Sexual/menores de edad",active: false, ratio: 0, action: '' },
+        'hate/threatening': { name: "Odio/amenazas", active: false, ratio: 0, action: '' },
+        'violence/graphic': { name: "Violencia/gráfico", active: false, ratio: 0, action: '' },
+        'self-harm/intent': { name: "Autolesiones/intento", active: false, ratio: 0, action: '' },
+        'self-harm/instructions': { name: "Autolesiones/instrucciones", active: false, ratio: 0, action: '' },
+        'harassment/threatening': { name: "Acoso/amenazas", active: false, ratio: 0, action: '' },
+        violence: {name: "Violencia",  active: false, ratio: 0, action: '' }
       },
       actions: [
-        { name: 'Banear permanentemente', value: 'banner_permanent' },
-        { name: 'Borrar comentario', value: 'delete_comment' },
+        // { name: 'Banear permanentemente', value: 'banner_permanent' },
+        // { name: 'Borrar comentario', value: 'delete_comment' },
         { name: 'Alertar', value: 'alert' },
         { name: 'Bannear', value: 'banner' }
       ]
@@ -92,7 +92,7 @@ export default {
       <div class="categories">
         <div class="category-item"><div class="title">Categorias</div><div class="title slider">Sensibilidad</div></div>
         <div class="category-item" v-for="(cat, key) of categories">
-          <v-checkbox :label="key" v-model="cat.active"></v-checkbox>
+          <v-checkbox :label="cat.name" v-model="cat.active"></v-checkbox>
           <v-slider class="slider" v-model="cat.sesibility" :disabled="!cat.active" step="0.05" min="0" max="1"></v-slider>
           <v-select label="Select" :items="actions" item-title="name" item-value="value" variant="outlined" v-model="cat.punishment" :disabled="!cat.active"></v-select>
         </div>
