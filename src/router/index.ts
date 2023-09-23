@@ -8,7 +8,7 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      redirect: { name: 'PLATFORM', params: { id: 'twitch' } }
+      component: HomeView
     },
     {
       path: '/config',

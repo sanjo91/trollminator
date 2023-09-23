@@ -25,19 +25,29 @@ export default {
           healthy : '55%'
         } 
       },
-      selectedData : { color: '#624BFF', name : 'Twitch' },
+      selectedData : { color: '#624BFF', 
+          name : 'Twitch',
+          banned : 18,
+          filterComment : 132,
+          deleteComment : 12,
+          healthy : '85%' },
       categories: {
-        sexual: { name: "Sexual", active: false, ratio: 0, action: '', },
-        hate: { name: "Odio", active: false, ratio: 0, action: '' },
-        harassment: { name: "Acoso", active: false, ratio: 0, action: '' },
-        'self-harm': { name: "Autolesiones", active: false, ratio: 0, action: '' },
-        'sexual/minors': { name: "Sexual/menores de edad",active: false, ratio: 0, action: '' },
-        'hate/threatening': { name: "Odio/amenazas", active: false, ratio: 0, action: '' },
-        'violence/graphic': { name: "Violencia/gráfico", active: false, ratio: 0, action: '' },
-        'self-harm/intent': { name: "Autolesiones/intento", active: false, ratio: 0, action: '' },
-        'self-harm/instructions': { name: "Autolesiones/instrucciones", active: false, ratio: 0, action: '' },
-        'harassment/threatening': { name: "Acoso/amenazas", active: false, ratio: 0, action: '' },
-        violence: {name: "Violencia",  active: false, ratio: 0, action: '' }
+        sexual: { name: 'Sexual', active: false, ratio: 0, action: '' },
+        hate: { name: 'Odio', active: false, ratio: 0, action: '' },
+        harassment: { name: 'Acoso', active: false, ratio: 0, action: '' },
+        'self-harm': { name: 'Autolesiones', active: false, ratio: 0, action: '' },
+        'sexual/minors': { name: 'Sexual/menores de edad', active: false, ratio: 0, action: '' },
+        'hate/threatening': { name: 'Odio/amenazas', active: false, ratio: 0, action: '' },
+        'violence/graphic': { name: 'Violencia/gráfico', active: false, ratio: 0, action: '' },
+        'self-harm/intent': { name: 'Autolesiones/intento', active: false, ratio: 0, action: '' },
+        'self-harm/instructions': {
+          name: 'Autolesiones/instrucciones',
+          active: false,
+          ratio: 0,
+          action: ''
+        },
+        'harassment/threatening': { name: 'Acoso/amenazas', active: false, ratio: 0, action: '' },
+        violence: { name: 'Violencia', active: false, ratio: 0, action: '' }
       },
       actions: [
         // { name: 'Banear permanentemente', value: 'banner_permanent' },
@@ -49,8 +59,8 @@ export default {
   },
   methods: {
     send() {
-      const headers = { 'Content-Type': 'application/json'}
-    
+      const headers = { 'Content-Type': 'application/json' }
+
       axios
         .post('user/twitch/config', this.categories, headers)
         .then((response) => {
@@ -91,7 +101,7 @@ export default {
 <template>
   <main class="container">
     
-      <div class="data" :class="id === 'twitch' ? 'background-twitch' : 'background-youtube'">
+      <div class="data" :class="{'background-twitch' : id !== 'youtube', 'background-youtube': id === 'youtube' }">
         <div class="title1">{{ selectedData.name }}</div>
         <div class="data-container">
           <div class="card-data">
@@ -116,7 +126,7 @@ export default {
           </div>
         </div>
       </div>
-   
+
     <v-card class="card">
       <div class="categories">
         <div class="category-item">
@@ -134,8 +144,23 @@ export default {
         </div>
         <div class="category-item" v-for="(cat, key) of categories">
           <v-checkbox :label="cat.name" v-model="cat.active"></v-checkbox>
-          <v-slider class="slider tag" v-model="cat.sesibility" :disabled="!cat.active" step="0.05" min="0" max="1"></v-slider>
-          <v-select label="Seleccione una acción" :items="actions" item-title="name" item-value="value" variant="outlined" v-model="cat.punishment" :disabled="!cat.active"></v-select>
+          <v-slider
+            class="slider tag"
+            v-model="cat.sesibility"
+            :disabled="!cat.active"
+            step="0.05"
+            min="0"
+            max="1"
+          ></v-slider>
+          <v-select
+            label="Seleccione una acción"
+            :items="actions"
+            item-title="name"
+            item-value="value"
+            variant="outlined"
+            v-model="cat.punishment"
+            :disabled="!cat.active"
+          ></v-select>
         </div>
         <v-btn @click="send">Enviar</v-btn>
       </div>
@@ -144,28 +169,27 @@ export default {
 </template>
 
 <style>
-  .container {
-    
-    background: #f2f2f2;
-  }
-  .card {
-    margin-left: 2rem;
-    margin-right: 2rem;
-    padding: 4rem;
-    margin-bottom: 1rem;
-  }
-  .input {
-    margin-top: 1rem;
-  }
-  .category-item {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1rem;
-  }
-  .slider {
-    grid-column: 2 / 4;
-    position: relative;
-  }
+.container {
+  background: #f2f2f2;
+}
+.card {
+  margin-left: 2rem;
+  margin-right: 2rem;
+  padding: 4rem;
+  margin-bottom: 1rem;
+}
+.input {
+  margin-top: 1rem;
+}
+.category-item {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+}
+.slider {
+  grid-column: 2 / 4;
+  position: relative;
+}
 
   .slider.tag::before {
     content: 'bajo';
