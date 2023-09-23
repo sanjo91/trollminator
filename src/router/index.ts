@@ -18,7 +18,7 @@ const router = createRouter({
     {
       path: '/platform/:id',
       name: 'PLATFORM',
-      component: () => import('../views/AboutView.vue')
+      component: () => Config
     },
     {
       path: '/add-platform',
