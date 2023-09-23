@@ -93,8 +93,8 @@ export default {
         <div class="category-item"><div class="title">Categorias</div><div class="title slider">Sensibilidad</div></div>
         <div class="category-item" v-for="(cat, key) of categories">
           <v-checkbox :label="cat.name" v-model="cat.active"></v-checkbox>
-          <v-slider class="slider" v-model="cat.sesibility" :disabled="!cat.active" step="0.05" min="0" max="1"></v-slider>
-          <v-select label="Select" :items="actions" item-title="name" item-value="value" variant="outlined" v-model="cat.punishment" :disabled="!cat.active"></v-select>
+          <v-slider class="slider tag" v-model="cat.sesibility" :disabled="!cat.active" step="0.05" min="0" max="1"></v-slider>
+          <v-select label="Seleccione una acción" :items="actions" item-title="name" item-value="value" variant="outlined" v-model="cat.punishment" :disabled="!cat.active"></v-select>
         </div>
         <v-btn @click="send">Enviar</v-btn>
       </div>
@@ -126,12 +126,22 @@ export default {
     position: relative;
   }
 
-  /* .slider::before {
+  .slider.tag::before {
+    content: 'bajo';
+    position: absolute;
+    top: -7px;
+    left: -10px;
+    font-size: 0.75rem;
+    color: grey
+  }
+  .slider.tag::after {
     content: 'alto';
     position: absolute;
-    top: -5px;
-    font-size: ;
-  } */
+    top: -7px;
+    right: -10px;
+    font-size: 0.75rem;
+    color: grey
+  }
   .title {
     text-align: center;
   }
