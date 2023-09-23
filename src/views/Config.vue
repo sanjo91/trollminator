@@ -30,31 +30,31 @@ export default {
   },
   methods: {
     send() {
-      console.log(this.categories)
-      /*
+      const headers = { 'Content-Type': 'application/json'}
+    
       axios
-        .post('URL_DE_TU_API_AQUI', this.categories)
+        .post('user/twitch/config', this.categories, headers)
         .then((response) => {
           console.log('Respuesta de la solicitud POST:', response.data)
         })
         .catch((error) => {
           console.error('Error en la solicitud POST:', error)
         })
-        */
+      
     }
   },
   mounted() {
-    /*
+    
     axios
-      .get('https://rickandmortyapi.com/api/character/?page=19')
+      .get('user/twitch/config')
       .then((response) => {
-        this.data = response.data.results // Accede a la propiedad 'results' que contiene el array de datos
+        this.categories = response.data.results // Accede a la propiedad 'results' que contiene el array de datos
         console.log(this.ccategories)
       })
       .catch((error) => {
         console.error('Error:', error)
       })
-    */
+  
   }
 }
 </script>
