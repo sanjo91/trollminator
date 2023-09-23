@@ -1,12 +1,31 @@
 <script lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
 import axios from 'axios'
+import { onUpdated } from 'vue'
 
 export default {
   data() {
     return {
-      prompt: '',
-      data: undefined,
+      id: '',
+      data : { 
+        twitch : { 
+          color: '#624BFF', 
+          name : 'Twitch',
+          banned : 18,
+          filterComment : 132,
+          deleteComment : 12,
+          healthy : '85%'
+        }, 
+        youtube : { 
+          color: '#c4302b', 
+          name : 'YouTube',
+          banned : 25,
+          filterComment : 87,
+          deleteComment : 98,
+          healthy : '55%'
+        } 
+      },
+      selectedData : { color: '#624BFF', name : 'Twitch' },
       categories: {
         sexual: { name: "Sexual", active: false, ratio: 0, action: '', },
         hate: { name: "Odio", active: false, ratio: 0, action: '' },
@@ -41,20 +60,30 @@ export default {
           console.error('Error en la solicitud POST:', error)
         })
       
-    }
-  },
-  mounted() {
-    
-    axios
+    },
+    get() {
+      axios
       .get('user/twitch/config')
       .then((response) => {
         this.categories = response.data.results // Accede a la propiedad 'results' que contiene el array de datos
-        console.log(this.ccategories)
+        console.log(this.categories)
       })
       .catch((error) => {
         console.error('Error:', error)
       })
+    }
+  },
+  mounted() {
+    this.get()    
   
+  },
+  updated() {
+    if(this.id !== this.$route.params.id)
+    {
+      this.id = this.$route.params.id
+      this.selectedData = this.data[this.id] || this.data.twitch;
+      this.get();
+    }
   }
 }
 </script>
@@ -62,27 +91,27 @@ export default {
 <template>
   <main class="container">
     
-      <div class="data">
-        <div class="title1">Twitch</div>
+      <div class="data" :class="id === 'twitch' ? 'background-twitch' : 'background-youtube'">
+        <div class="title1">{{ selectedData.name }}</div>
         <div class="data-container">
           <div class="card-data">
             <div class="title">Baneados</div>
-            <div class="num">18</div>
+            <div class="num">{{selectedData.banned}}</div>
             <div class="subtitle">2 Completados</div>
           </div>
           <div class="card-data">
             <div class="title">Contenido filtrado</div>
-            <div class="num">132</div>
+            <div class="num">{{selectedData.filterComment}}</div>
             <div class="subtitle">28 Completados</div>
           </div>
           <div class="card-data">
             <div class="title">Comentarios borrados</div>
-            <div class="num">12</div>
+            <div class="num">{{selectedData.deleteComment}}</div>
             <div class="subtitle">2 Completados</div>
           </div>
           <div class="card-data">
             <div class="title">Salud</div>
-            <div class="num">76%</div>
+            <div class="num">{{selectedData.healthy}}</div>
             <div class="subtitle">5% Completados</div>
           </div>
         </div>
@@ -159,10 +188,13 @@ export default {
   }
   
   .data {
-
-    background-image: linear-gradient(to bottom, #624BFF 0%, #624BFF 75%, #f2f2f2 75%, #f2f2f2 100%);
-
     margin-bottom: 2rem;
+  }
+  .background-twitch {
+    background-image: linear-gradient(to bottom, #624BFF 0%, #624BFF 75%, #f2f2f2 75%, #f2f2f2 100%);
+  }
+  .background-youtube {
+    background-image: linear-gradient(to bottom, #c4302b 0%, #c4302b 75%, #f2f2f2 75%, #f2f2f2 100%);
   }
   .data .title1 {
     color: white;
