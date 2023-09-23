@@ -50,7 +50,7 @@ export default {
           </v-list>
         </v-navigation-drawer>
 
-        <v-main style="height: 100vh"> <RouterView /></v-main>
+        <v-main><RouterView /></v-main>
       </v-layout>
     </v-card>
   </v-app>
