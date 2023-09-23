@@ -1,6 +1,17 @@
-<script setup lang="ts">
+<script lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
 
+  export default {
+    data() {
+      return {
+      open: ['Platforms'],
+      platforms: [
+        ['Tiwtch', 'mdi-twitch'],
+        ['Discord', 'mdi-discord'],
+      ]
+    };
+    }
+  };
 </script>
 
 <template>
@@ -22,9 +33,25 @@ import { RouterLink, RouterView } from 'vue-router'
         <v-divider></v-divider>
 
         <v-list density="compact" nav>
-          <v-list-item prepend-icon="mdi-folder" title="My Files" value="myfiles"></v-list-item>
-          <v-list-item prepend-icon="mdi-account-multiple" title="Shared with me" value="shared"></v-list-item>
-          <v-list-item prepend-icon="mdi-star" title="Starred" value="starred"></v-list-item>
+          <v-list-item prepend-icon="mdi-cog" title="Configurar promt" value="config"></v-list-item>
+          
+          <v-list-group value="platforms">
+            <template v-slot:activator="{ props }">
+              <v-list-item
+                v-bind="props"
+                prepend-icon="mdi-laptop"
+                title="Plataformas"
+              ></v-list-item>
+            </template>
+            <v-list-item
+              v-for="([title, icon], i) in platforms"
+              :key="i"
+              :title="title"
+              :prepend-icon="icon"
+              :value="title"
+            ></v-list-item>
+          </v-list-group>
+          <v-list-item prepend-icon="mdi-plus" title="Añadir plataforma" value="add"></v-list-item>
         </v-list>
       </v-navigation-drawer>
 
