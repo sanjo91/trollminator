@@ -32,22 +32,22 @@ export default {
           deleteComment : 12,
           healthy : '85%' },
       categories: {
-        sexual: { name: 'Sexual', active: false, ratio: 0, action: '' },
-        hate: { name: 'Odio', active: false, ratio: 0, action: '' },
-        harassment: { name: 'Acoso', active: false, ratio: 0, action: '' },
-        'self-harm': { name: 'Autolesiones', active: false, ratio: 0, action: '' },
-        'sexual/minors': { name: 'Sexual/menores de edad', active: false, ratio: 0, action: '' },
-        'hate/threatening': { name: 'Odio/amenazas', active: false, ratio: 0, action: '' },
-        'violence/graphic': { name: 'Violencia/gráfico', active: false, ratio: 0, action: '' },
-        'self-harm/intent': { name: 'Autolesiones/intento', active: false, ratio: 0, action: '' },
+        sexual: { name: 'sexual', active: false, ratio: 0, action: '' },
+        hate: { name: 'hate', active: false, ratio: 0, action: '' },
+        harassment: { name: 'harassment', active: false, ratio: 0, action: '' },
+        'self-harm': { name: 'self-harm', active: false, ratio: 0, action: '' },
+        'sexual/minors': { name: 'sexual/minors', active: false, ratio: 0, action: '' },
+        'hate/threatening': { name: 'hate/threatening', active: false, ratio: 0, action: '' },
+        'violence/graphic': { name: 'violence/graphic', active: false, ratio: 0, action: '' },
+        'self-harm/intent': { name: 'self-harm/intent', active: false, ratio: 0, action: '' },
         'self-harm/instructions': {
-          name: 'Autolesiones/instrucciones',
+          name: 'self-harm/instructions',
           active: false,
           ratio: 0,
           action: ''
         },
-        'harassment/threatening': { name: 'Acoso/amenazas', active: false, ratio: 0, action: '' },
-        violence: { name: 'Violencia', active: false, ratio: 0, action: '' }
+        'harassment/threatening': { name: 'harassment/threatening', active: false, ratio: 0, action: '' },
+        violence: { name: 'violence', active: false, ratio: 0, action: '' }
       },
       catName: {
         sexual: 'Sexual',
